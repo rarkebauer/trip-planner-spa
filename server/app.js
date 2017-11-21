@@ -5,11 +5,19 @@ const bodyParser = require('body-parser');
 const port = 3000;
 const path = require('path');
 const {db} = require('../models')
+const apiRouter = require('../routes/api.js')
 
 app.use(express.static(path.join(__dirname, '..', 'public')))
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: true}));
+
+app.use('/api/', apiRouter);
+
+
+
+
+
 
 // catch 404 (i.e., no route was hit) and forward to error handler
 app.use(function(req, res, next) {
@@ -26,6 +34,9 @@ app.use(function(err, req, res, next) {
     'An error happened ' + err.message
   );
 });
+
+
+
 
 app.listen(port, function() {
   console.log("The server is listening closely on port", port);

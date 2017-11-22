@@ -15,9 +15,7 @@ router.get('/', (req, res, next)=>{
     .then(values=>{
         allAttractions.hotels = values[0]
         allAttractions.restaurants = values[1]
-        allAttractions.activites = values[2]
-    // })
-    // .then(()=>{
+        allAttractions.activities = values[2]
         res.json(allAttractions);
     })
     .catch(next)

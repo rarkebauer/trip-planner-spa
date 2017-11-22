@@ -553,25 +553,67 @@ const map = new mapboxgl.Map({
 const marker = buildMarker("activities", fullstackCoords);
 marker.addTo(map);
 
-
-  // const hotels, restaurants, activites;
-  // hotels = document.getElementById('hotels-choices');
-  // restaurants = document.getElementById('restaurants-choices');
-  // activities = document.getElementById('activities-choices');
-
-  fetch('/api')
-  .then(result=>{
-      console.log('HIIIIII')
-      console.log(result)
-      return result.json()
+fetch('/api')
+  .then(result => {
+    //console.log(result)
+    return result.json()
   }).then(data => {
-    console.log(data)
+    //console.log(data)
+    let hotels;
+    let restaurants;
+    let activities;
+    hotels = document.getElementById('hotels-choices');
+    restaurants = document.getElementById('restaurants-choices');
+    activities = document.getElementById('activities-choices');
+
+    data.hotels.forEach(hotel => {
+      let op = document.createElement('option');
+      op.innerHTML = `${hotel.name}`
+      hotels.append(op);
+    })
+    data.restaurants.forEach(rest => {
+      let op = document.createElement('option');
+      op.innerHTML = `${rest.name}`
+      restaurants.append(op);
+    })
+    data.activities.forEach(activity => {
+      let op = document.createElement('option');
+      op.innerHTML = `${activity.name}`
+      activities.append(op);
+    })
   })
   .catch(console.error)
 
+const selectHotel = document.getElementById(`hotels-choices`);
+const myHotel = document.getElementById('hotels-list')
+const addHotel = document.getElementById('hotels-add')
+  .addEventListener('click', () => {
+    let value = (selectHotel.value)
+    const li = document.createElement('li');
+    li.innerHTML = value;
+    myHotel.append(li);
+    const hotelMarker = buildMarker()
+  })
 
+const selectRestaurant = document.getElementById(`restaurants-choices`);
+const myRestaurant = document.getElementById('restaurants-list')
+const addRest = document.getElementById('restaurants-add')
+  .addEventListener('click', () => {
+    let value = (selectRestaurant.value)
+    const li = document.createElement('li');
+    li.innerHTML = value;
+    myRestaurant.append(li);
+  })
 
-
+const selectActivities = document.getElementById(`activities-choices`);
+const myActivities = document.getElementById('activities-list')
+const addAct = document.getElementById('activities-add')
+  .addEventListener('click', () => {
+    let value = (selectActivities.value)
+    const li = document.createElement('li');
+    li.innerHTML = value;
+    myActivities.append(li);
+  })
 
 /***/ }),
 /* 2 */

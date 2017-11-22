@@ -1,5 +1,6 @@
 const mapboxgl = require("mapbox-gl");
 const buildMarker = require("./marker.js");
+//const api = require("../routes/api")
 
 mapboxgl.accessToken = 'pk.eyJ1IjoiZXdlaWw1MDUiLCJhIjoiY2phOXV6ejA4MGw0djJ3cTlueXk2ZmN2YSJ9.BtM-8_ccNMBf7ZMgiVhqIw';
 
@@ -15,3 +16,22 @@ const map = new mapboxgl.Map({
 
 const marker = buildMarker("activities", fullstackCoords);
 marker.addTo(map);
+
+
+  // const hotels, restaurants, activites;
+  // hotels = document.getElementById('hotels-choices');
+  // restaurants = document.getElementById('restaurants-choices');
+  // activities = document.getElementById('activities-choices');
+
+  fetch('/api')
+  .then(result=>{
+      console.log('HIIIIII')
+      console.log(result)
+      return result.json()
+  }).then(data => {
+    console.log(data)
+  })
+  .catch(console.error)
+
+
+
